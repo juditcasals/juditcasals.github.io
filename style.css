@@ -1,8 +1,27 @@
-*{
-    background-image: url("gat-pixel.png");
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    text-align: center; 
+:root {
+	--bg-hue: 0;
+	/* aquest selector de sota diu: si dins de mi algun element amb data-bg-hue
+	està hovereat o focusejat, farem que --bg-hue sigui el seu valor
+	(que hem aconseguit amb script.js) */
+	&:has([data-bg-hue]:hover, [data-bg-hue]:focus) {
+		--bg-hue: var(--hover-bg-hue, 0);
+	}
 }
+
+.bg {
+	background-image: url("gat-pixel.png");
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	filter: hue-rotate(calc(var(--bg-hue) * 1turn));
+	z-index: -1; /* s'ha de posar a sota perquè la propietat 'filter' el fa estar a sobre si no */
+}
+
+* {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    text-align: center;
+}
+
 #upper_left {
 	position: absolute;
 	top: 0;
